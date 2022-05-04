@@ -10,7 +10,7 @@ import SwiftUI
 struct NotesView: View {
     
     @StateObject var viewModel = NotesViewModel()
-    @State private var showingAddNote = false
+    @State var showingAddNote = false
     
     var body: some View {
         VStack {
@@ -43,7 +43,7 @@ struct NotesView: View {
             .cornerRadius(100/2)
             .padding()
             .sheet(isPresented: $showingAddNote) {
-                AddNoteView()
+                AddNoteView(showingAddNote: $showingAddNote)
             }
         }
         .background(Color(.systemGroupedBackground))
