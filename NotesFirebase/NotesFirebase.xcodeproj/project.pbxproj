@@ -11,6 +11,8 @@
 		36EDF6272822A483008867C5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EDF6262822A483008867C5 /* ContentView.swift */; };
 		36EDF6292822A484008867C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36EDF6282822A484008867C5 /* Assets.xcassets */; };
 		36EDF62C2822A484008867C5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36EDF62B2822A484008867C5 /* Preview Assets.xcassets */; };
+		36EDF6342822A5E8008867C5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 36EDF6332822A5E8008867C5 /* FirebaseAuth */; };
+		36EDF6362822A5E8008867C5 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 36EDF6352822A5E8008867C5 /* FirebaseDatabase */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36EDF6362822A5E8008867C5 /* FirebaseDatabase in Frameworks */,
+				36EDF6342822A5E8008867C5 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +87,10 @@
 			dependencies = (
 			);
 			name = NotesFirebase;
+			packageProductDependencies = (
+				36EDF6332822A5E8008867C5 /* FirebaseAuth */,
+				36EDF6352822A5E8008867C5 /* FirebaseDatabase */,
+			);
 			productName = NotesFirebase;
 			productReference = 36EDF6212822A483008867C5 /* NotesFirebase.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +119,9 @@
 				Base,
 			);
 			mainGroup = 36EDF6182822A483008867C5;
+			packageReferences = (
+				36EDF6322822A5E8008867C5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 36EDF6222822A483008867C5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -264,7 +275,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NotesFirebase/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -294,7 +306,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NotesFirebase/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -341,6 +354,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		36EDF6322822A5E8008867C5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		36EDF6332822A5E8008867C5 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 36EDF6322822A5E8008867C5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		36EDF6352822A5E8008867C5 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 36EDF6322822A5E8008867C5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 36EDF6192822A483008867C5 /* Project object */;
 }
