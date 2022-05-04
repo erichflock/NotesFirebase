@@ -18,6 +18,8 @@
 		36EDF63F2822AB4A008867C5 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 36EDF63E2822AB4A008867C5 /* GoogleSignIn */; };
 		36EDF6422822AE8F008867C5 /* CustomModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EDF6412822AE8F008867C5 /* CustomModifiers.swift */; };
 		36EDF6472822BB76008867C5 /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EDF6462822BB76008867C5 /* NotesView.swift */; };
+		36EDF6492822C5A6008867C5 /* NotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EDF6482822C5A6008867C5 /* NotesViewModel.swift */; };
+		36EDF64C2822C600008867C5 /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EDF64B2822C600008867C5 /* AddNoteView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,8 @@
 		36EDF63A2822A9D3008867C5 /* InitialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewModel.swift; sourceTree = "<group>"; };
 		36EDF6412822AE8F008867C5 /* CustomModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModifiers.swift; sourceTree = "<group>"; };
 		36EDF6462822BB76008867C5 /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
+		36EDF6482822C5A6008867C5 /* NotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModel.swift; sourceTree = "<group>"; };
+		36EDF64B2822C600008867C5 /* AddNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,9 +110,19 @@
 		36EDF6432822B856008867C5 /* NotesView */ = {
 			isa = PBXGroup;
 			children = (
+				36EDF64A2822C5F4008867C5 /* Add Note */,
 				36EDF6462822BB76008867C5 /* NotesView.swift */,
+				36EDF6482822C5A6008867C5 /* NotesViewModel.swift */,
 			);
 			path = NotesView;
+			sourceTree = "<group>";
+		};
+		36EDF64A2822C5F4008867C5 /* Add Note */ = {
+			isa = PBXGroup;
+			children = (
+				36EDF64B2822C600008867C5 /* AddNoteView.swift */,
+			);
+			path = "Add Note";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,8 +207,10 @@
 			files = (
 				36EDF6272822A483008867C5 /* InitialView.swift in Sources */,
 				36EDF6422822AE8F008867C5 /* CustomModifiers.swift in Sources */,
+				36EDF6492822C5A6008867C5 /* NotesViewModel.swift in Sources */,
 				36EDF6472822BB76008867C5 /* NotesView.swift in Sources */,
 				36EDF6252822A483008867C5 /* NotesFirebaseApp.swift in Sources */,
+				36EDF64C2822C600008867C5 /* AddNoteView.swift in Sources */,
 				36EDF63B2822A9D3008867C5 /* InitialViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

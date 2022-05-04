@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct NotesView: View {
+    
+    @StateObject var viewModel = NotesViewModel()
+    @State private var showingAddNote = false
+    
     var body: some View {
         VStack {
             List {
@@ -15,12 +19,18 @@ struct NotesView: View {
                 Text("Note 2")
                 Text("Note 3")
                 Text("Note 4")
+                Text("Note 1")
+                Text("Note 2")
+                Text("Note 3")
+                Text("Note 4")
+                Text("Note 1")
+                Text("Note 2")
             }
             
             Spacer()
             
             Button {
-                print("did tap add")
+                showingAddNote.toggle()
             } label: {
                 Image(systemName: "plus")
                     .resizable()
@@ -32,6 +42,9 @@ struct NotesView: View {
             .controlSize(.large)
             .cornerRadius(100/2)
             .padding()
+            .sheet(isPresented: $showingAddNote) {
+                AddNoteView()
+            }
         }
         .background(Color(.systemGroupedBackground))
     }
