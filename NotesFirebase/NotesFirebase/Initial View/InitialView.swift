@@ -16,20 +16,24 @@ struct InitialView: View {
             
             if viewModel.isUserSignedIn() {
                 
-                if let imageURL = viewModel.getProfileImage()?.description {
-                    AsyncImage(url: URL(string: imageURL))
-                        .frame(width: 50, height: 50)
-                        .cornerRadius(50/2)
+                HStack {
+                    if let imageURL = viewModel.getProfileImage()?.description {
+                        AsyncImage(url: URL(string: imageURL))
+                            .frame(width: 50, height: 50)
+                            .cornerRadius(50/2)
+                    }
+                    
+                    Text("Welcome \(viewModel.getUserName() ?? "")")
+                    
+                    Button {
+                        viewModel.signOut()
+                    } label: {
+                        Image(systemName: "xmark")
+                    }
+                    .modifier(CloseButtonStyle(size: .regular))
                 }
-                
-                Text("Welcome \(viewModel.getUserName() ?? "")")
-                
-                Button {
-                    viewModel.signOut()
-                } label: {
-                    Text("Sign Out")
-                }
-                .modifier(StandardButtonStyle())
+                .padding(.top, 10)
+                Spacer()
             }
             
             if !viewModel.isUserSignedIn() {
@@ -42,7 +46,7 @@ struct InitialView: View {
                             .padding([.leading])
                     }
                 }
-                .modifier(StandardButtonStyle())
+                .modifier(StandardButtonStyle(size: .large))
             }
         }
     }

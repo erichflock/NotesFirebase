@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct StandardButtonStyle: ViewModifier {
-
+    
+    let size: ControlSize
+    
     func body(content: Content) -> some View {
         content
             .buttonStyle(.bordered)
             .tint(.blue)
-            .controlSize(.large)
+            .controlSize(size)
     }
     
 }
@@ -21,7 +23,20 @@ struct StandardButtonStyle: ViewModifier {
 extension View {
     
     func standardButton() -> some View {
-        modifier(StandardButtonStyle())
+        modifier(StandardButtonStyle(size: .regular))
+    }
+    
+}
+
+struct CloseButtonStyle: ViewModifier {
+    
+    let size: ControlSize
+    
+    func body(content: Content) -> some View {
+        content
+            .buttonStyle(.borderless)
+            .tint(.red)
+            .controlSize(size)
     }
     
 }
