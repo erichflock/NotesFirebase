@@ -37,6 +37,10 @@ struct InitialView: View {
                     viewModel.signIn()
                 } label: {
                     Text("Sign In")
+                    if viewModel.isLoading {
+                        ProgressView()
+                            .padding([.leading])
+                    }
                 }
                 .modifier(StandardButtonStyle())
             }
