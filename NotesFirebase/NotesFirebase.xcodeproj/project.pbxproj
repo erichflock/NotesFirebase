@@ -21,6 +21,7 @@
 		36EDF6492822C5A6008867C5 /* NotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EDF6482822C5A6008867C5 /* NotesViewModel.swift */; };
 		36EDF64C2822C600008867C5 /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EDF64B2822C600008867C5 /* AddNoteView.swift */; };
 		36EDF64F2822C7AC008867C5 /* XRoundedDismissButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EDF64E2822C7AC008867C5 /* XRoundedDismissButton.swift */; };
+		36EDF6512822CDD2008867C5 /* AddNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EDF6502822CDD2008867C5 /* AddNoteViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		36EDF6482822C5A6008867C5 /* NotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModel.swift; sourceTree = "<group>"; };
 		36EDF64B2822C600008867C5 /* AddNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteView.swift; sourceTree = "<group>"; };
 		36EDF64E2822C7AC008867C5 /* XRoundedDismissButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRoundedDismissButton.swift; sourceTree = "<group>"; };
+		36EDF6502822CDD2008867C5 /* AddNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				36EDF64B2822C600008867C5 /* AddNoteView.swift */,
+				36EDF6502822CDD2008867C5 /* AddNoteViewModel.swift */,
 			);
 			path = "Add Note";
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				36EDF6272822A483008867C5 /* InitialView.swift in Sources */,
 				36EDF6422822AE8F008867C5 /* CustomModifiers.swift in Sources */,
 				36EDF6492822C5A6008867C5 /* NotesViewModel.swift in Sources */,
+				36EDF6512822CDD2008867C5 /* AddNoteViewModel.swift in Sources */,
 				36EDF6472822BB76008867C5 /* NotesView.swift in Sources */,
 				36EDF6252822A483008867C5 /* NotesFirebaseApp.swift in Sources */,
 				36EDF64C2822C600008867C5 /* AddNoteView.swift in Sources */,

@@ -10,10 +10,30 @@ import SwiftUI
 struct AddNoteView: View {
     
     @Binding var showingAddNote: Bool
+    @StateObject var viewModel = AddNoteViewModel()
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            VStack() {
+                Text("Add Note")
+                    .font(.title)
+                
+                TextEditor(text: $viewModel.note)
+                    .lineLimit(20)
+                    .foregroundColor(viewModel.note == AddNoteViewModel.placeholder ? .gray : .primary)
+                    .onTapGesture {
+                        if viewModel.note == AddNoteViewModel.placeholder {
+                            viewModel.note = ""
+                        }
+                    }
+            }
+            Button {
+                print("Save Note: \(viewModel.note)")
+            } label: {
+                Text("Save")
+            }
+            .modifier(StandardButtonStyle(size: .regular))
+            .padding([.bottom], 50)
         }
         .padding()
         .frame(
