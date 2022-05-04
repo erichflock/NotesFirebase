@@ -39,7 +39,7 @@ struct NotesFirebaseApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            InitialView()
         }
     }
 }
