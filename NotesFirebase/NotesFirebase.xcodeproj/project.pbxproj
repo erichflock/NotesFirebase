@@ -13,6 +13,7 @@
 		36EDF62C2822A484008867C5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36EDF62B2822A484008867C5 /* Preview Assets.xcassets */; };
 		36EDF6342822A5E8008867C5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 36EDF6332822A5E8008867C5 /* FirebaseAuth */; };
 		36EDF6362822A5E8008867C5 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 36EDF6352822A5E8008867C5 /* FirebaseDatabase */; };
+		36EDF6382822A6F1008867C5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36EDF6372822A6F1008867C5 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,8 @@
 		36EDF6262822A483008867C5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		36EDF6282822A484008867C5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		36EDF62B2822A484008867C5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		36EDF6372822A6F1008867C5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		36EDF6392822A71D008867C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,9 +58,11 @@
 		36EDF6232822A483008867C5 /* NotesFirebase */ = {
 			isa = PBXGroup;
 			children = (
+				36EDF6392822A71D008867C5 /* Info.plist */,
 				36EDF6242822A483008867C5 /* NotesFirebaseApp.swift */,
 				36EDF6262822A483008867C5 /* ContentView.swift */,
 				36EDF6282822A484008867C5 /* Assets.xcassets */,
+				36EDF6372822A6F1008867C5 /* GoogleService-Info.plist */,
 				36EDF62A2822A484008867C5 /* Preview Content */,
 			);
 			path = NotesFirebase;
@@ -138,6 +143,7 @@
 			files = (
 				36EDF62C2822A484008867C5 /* Preview Assets.xcassets in Resources */,
 				36EDF6292822A484008867C5 /* Assets.xcassets in Resources */,
+				36EDF6382822A6F1008867C5 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,12 +282,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NotesFirebase/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotesFirebase/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -307,12 +314,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NotesFirebase/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotesFirebase/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
