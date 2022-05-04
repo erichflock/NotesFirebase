@@ -17,6 +17,7 @@
 		36EDF63B2822A9D3008867C5 /* InitialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EDF63A2822A9D3008867C5 /* InitialViewModel.swift */; };
 		36EDF63F2822AB4A008867C5 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 36EDF63E2822AB4A008867C5 /* GoogleSignIn */; };
 		36EDF6422822AE8F008867C5 /* CustomModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EDF6412822AE8F008867C5 /* CustomModifiers.swift */; };
+		36EDF6472822BB76008867C5 /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EDF6462822BB76008867C5 /* NotesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		36EDF6392822A71D008867C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		36EDF63A2822A9D3008867C5 /* InitialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewModel.swift; sourceTree = "<group>"; };
 		36EDF6412822AE8F008867C5 /* CustomModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModifiers.swift; sourceTree = "<group>"; };
+		36EDF6462822BB76008867C5 /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				36EDF6392822A71D008867C5 /* Info.plist */,
 				36EDF6242822A483008867C5 /* NotesFirebaseApp.swift */,
 				36EDF63C2822A9D7008867C5 /* Initial View */,
+				36EDF6432822B856008867C5 /* NotesView */,
 				36EDF6282822A484008867C5 /* Assets.xcassets */,
 				36EDF6372822A6F1008867C5 /* GoogleService-Info.plist */,
 				36EDF62A2822A484008867C5 /* Preview Content */,
@@ -98,6 +101,14 @@
 				36EDF6412822AE8F008867C5 /* CustomModifiers.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		36EDF6432822B856008867C5 /* NotesView */ = {
+			isa = PBXGroup;
+			children = (
+				36EDF6462822BB76008867C5 /* NotesView.swift */,
+			);
+			path = NotesView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,6 +193,7 @@
 			files = (
 				36EDF6272822A483008867C5 /* InitialView.swift in Sources */,
 				36EDF6422822AE8F008867C5 /* CustomModifiers.swift in Sources */,
+				36EDF6472822BB76008867C5 /* NotesView.swift in Sources */,
 				36EDF6252822A483008867C5 /* NotesFirebaseApp.swift in Sources */,
 				36EDF63B2822A9D3008867C5 /* InitialViewModel.swift in Sources */,
 			);
