@@ -14,17 +14,16 @@ struct NotesView: View {
     
     var body: some View {
         VStack {
-            List {
-                Text("Note 1")
-                Text("Note 2")
-                Text("Note 3")
-                Text("Note 4")
-                Text("Note 1")
-                Text("Note 2")
-                Text("Note 3")
-                Text("Note 4")
-                Text("Note 1")
-                Text("Note 2")
+            List() {
+                ForEach(viewModel.notes, id: \.self) { note in
+                    if let title = viewModel.getTitle(note) {
+                        Text(title)
+                    }
+                }
+                .onDelete(perform: viewModel.removeRows)
+            }
+            .task {
+                viewModel.updateNotes()
             }
             
             Spacer()
@@ -43,7 +42,7 @@ struct NotesView: View {
             .cornerRadius(100/2)
             .padding()
             .sheet(isPresented: $showingAddNote) {
-                AddNoteView(showingAddNote: $showingAddNote)
+                AddNoteView(showingAddNote: $showingAddNote, notes: $viewModel.notes)
             }
         }
         .background(Color(.systemGroupedBackground))

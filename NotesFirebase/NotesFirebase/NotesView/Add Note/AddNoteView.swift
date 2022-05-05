@@ -10,6 +10,7 @@ import SwiftUI
 struct AddNoteView: View {
     
     @Binding var showingAddNote: Bool
+    @Binding var notes: [String]
     @StateObject var viewModel = AddNoteViewModel()
     
     var body: some View {
@@ -19,7 +20,6 @@ struct AddNoteView: View {
                     .font(.title)
                 
                 TextEditor(text: $viewModel.note)
-                    .lineLimit(20)
                     .foregroundColor(viewModel.note == AddNoteViewModel.placeholder ? .gray : .primary)
                     .onTapGesture {
                         if viewModel.note == AddNoteViewModel.placeholder {
@@ -29,6 +29,7 @@ struct AddNoteView: View {
             }
             Button {
                 viewModel.saveNote()
+                notes.append(viewModel.note)
                 showingAddNote = false
             } label: {
                 Text("Save")
@@ -50,6 +51,6 @@ struct AddNoteView: View {
 
 struct AddNoteView_Previews: PreviewProvider {
     static var previews: some View {
-        AddNoteView(showingAddNote: .constant(false))
+        AddNoteView(showingAddNote: .constant(false), notes: .constant([]))
     }
 }
