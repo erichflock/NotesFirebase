@@ -23,6 +23,8 @@
 		36EDF64F2822C7AC008867C5 /* XRoundedDismissButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EDF64E2822C7AC008867C5 /* XRoundedDismissButton.swift */; };
 		36EDF6512822CDD2008867C5 /* AddNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EDF6502822CDD2008867C5 /* AddNoteViewModel.swift */; };
 		36EDF6542823ECC4008867C5 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EDF6532823ECC4008867C5 /* Note.swift */; };
+		36EDF6572823FBD0008867C5 /* EditNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EDF6562823FBD0008867C5 /* EditNoteView.swift */; };
+		36EDF6592823FBDB008867C5 /* EditNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EDF6582823FBDB008867C5 /* EditNoteViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		36EDF64E2822C7AC008867C5 /* XRoundedDismissButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRoundedDismissButton.swift; sourceTree = "<group>"; };
 		36EDF6502822CDD2008867C5 /* AddNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewModel.swift; sourceTree = "<group>"; };
 		36EDF6532823ECC4008867C5 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		36EDF6562823FBD0008867C5 /* EditNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteView.swift; sourceTree = "<group>"; };
+		36EDF6582823FBDB008867C5 /* EditNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +122,7 @@
 		36EDF6432822B856008867C5 /* NotesView */ = {
 			isa = PBXGroup;
 			children = (
+				36EDF6552823FBC3008867C5 /* Edit Note */,
 				36EDF64A2822C5F4008867C5 /* Add Note */,
 				36EDF6462822BB76008867C5 /* NotesView.swift */,
 				36EDF6482822C5A6008867C5 /* NotesViewModel.swift */,
@@ -148,6 +153,15 @@
 				36EDF6532823ECC4008867C5 /* Note.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		36EDF6552823FBC3008867C5 /* Edit Note */ = {
+			isa = PBXGroup;
+			children = (
+				36EDF6562823FBD0008867C5 /* EditNoteView.swift */,
+				36EDF6582823FBDB008867C5 /* EditNoteViewModel.swift */,
+			);
+			path = "Edit Note";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,9 +246,11 @@
 			files = (
 				36EDF6272822A483008867C5 /* InitialView.swift in Sources */,
 				36EDF6422822AE8F008867C5 /* CustomModifiers.swift in Sources */,
+				36EDF6572823FBD0008867C5 /* EditNoteView.swift in Sources */,
 				36EDF6492822C5A6008867C5 /* NotesViewModel.swift in Sources */,
 				36EDF6512822CDD2008867C5 /* AddNoteViewModel.swift in Sources */,
 				36EDF6472822BB76008867C5 /* NotesView.swift in Sources */,
+				36EDF6592823FBDB008867C5 /* EditNoteViewModel.swift in Sources */,
 				36EDF6542823ECC4008867C5 /* Note.swift in Sources */,
 				36EDF6252822A483008867C5 /* NotesFirebaseApp.swift in Sources */,
 				36EDF64C2822C600008867C5 /* AddNoteView.swift in Sources */,
