@@ -16,11 +16,11 @@ class NotesViewModel: ObservableObject {
     let databaseReference = Database.database().reference()
     
     func updateNotes() {
-        guard let postsReference = createPostsReference() else { return }
+        guard let databaseReference = createDatabaseReference() else { return }
         
-        let postsQuery = postsReference.queryOrdered(byChild: "/date")
+        let query = databaseReference.queryOrdered(byChild: "/date")
         
-        postsQuery.observeSingleEvent(of: .value, andPreviousSiblingKeyWith: { [weak self] snapshot, key in
+        query.observeSingleEvent(of: .value, andPreviousSiblingKeyWith: { [weak self] snapshot, key in
             guard let self = self else { return }
             
             let dispatchGroup = DispatchGroup()
@@ -46,11 +46,40 @@ class NotesViewModel: ObservableObject {
         })
     }
     
-    func deleteNote() {
+    func deleteNote(noteKey: String) {
+        guard let databaseReferece = createDatabaseReference() else { return }
         
+        databaseReferece.observeSingleEvent(of: .value, andPreviousSiblingKeyWith: { [weak self] snapshot, key in
+            guard let self = self else { return }
+            
+            let dispatchGroup = DispatchGroup()
+            let children = snapshot.children
+            
+            dispatchGroup.enter()
+            
+            for child in children {
+                let childSnapshot = child as? DataSnapshot
+                guard let key = childSnapshot?.key else { return }
+                
+                if noteKey == key {
+                    databaseReferece.child(noteKey).removeValue()
+                }
+            }
+            
+            dispatchGroup.leave()
+            dispatchGroup.notify(queue: .main) {
+                self.updateNotes()
+            }
+        })
     }
     
     func removeRows(at offsets: IndexSet) {
+        offsets.forEach({
+            guard notes.count > $0 else { return }
+            let key = notes[$0].key
+            deleteNote(noteKey: key)
+        })
+        
         notes.remove(atOffsets: offsets)
     }
     
@@ -80,7 +109,7 @@ class NotesViewModel: ObservableObject {
     }
     
     //Helper Functions
-    private func createPostsReference() -> DatabaseReference? {
+    private func createDatabaseReference() -> DatabaseReference? {
         guard let userID = Auth.auth().currentUser?.uid else {
             print("error: user id not available. Please, sign in again.")
             return nil
