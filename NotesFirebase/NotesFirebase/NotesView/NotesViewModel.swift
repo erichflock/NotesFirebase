@@ -11,7 +11,7 @@ import FirebaseAuth
 
 class NotesViewModel: ObservableObject {
     
-    @Published var notes: [String] = []
+    @Published var notes: [Note] = []
     
     let databaseReference = Database.database().reference()
     
@@ -28,13 +28,14 @@ class NotesViewModel: ObservableObject {
             
             dispatchGroup.enter()
             
-            var updatedNotes: [String] = []
+            var updatedNotes: [Note] = []
             
             for child in children {
                 let childSnapshot = child as? DataSnapshot
                 guard let childNote = childSnapshot?.value as? NSDictionary else { return }
                 
-                if let note = childNote.value(forKey: "note") as? String {
+                if let key = childSnapshot?.key, let noteText = childNote.value(forKey: "note") as? String {
+                    let note = Note(key: key, text: noteText)
                     updatedNotes.append(note)
                 }
             }
@@ -43,6 +44,10 @@ class NotesViewModel: ObservableObject {
                 self.notes = updatedNotes
             }
         })
+    }
+    
+    func deleteNote() {
+        
     }
     
     func removeRows(at offsets: IndexSet) {

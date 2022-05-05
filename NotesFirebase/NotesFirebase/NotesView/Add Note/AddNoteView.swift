@@ -10,7 +10,7 @@ import SwiftUI
 struct AddNoteView: View {
     
     @Binding var showingAddNote: Bool
-    @Binding var notes: [String]
+    @ObservedObject var notesViewModel: NotesViewModel
     @StateObject var viewModel = AddNoteViewModel()
     
     var body: some View {
@@ -29,7 +29,7 @@ struct AddNoteView: View {
             }
             Button {
                 viewModel.saveNote()
-                notes.append(viewModel.note)
+                notesViewModel.updateNotes()
                 showingAddNote = false
             } label: {
                 Text("Save")
@@ -51,6 +51,6 @@ struct AddNoteView: View {
 
 struct AddNoteView_Previews: PreviewProvider {
     static var previews: some View {
-        AddNoteView(showingAddNote: .constant(false), notes: .constant([]))
+        AddNoteView(showingAddNote: .constant(false), notesViewModel: .init())
     }
 }

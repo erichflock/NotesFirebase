@@ -15,8 +15,8 @@ struct NotesView: View {
     var body: some View {
         VStack {
             List() {
-                ForEach(viewModel.notes, id: \.self) { note in
-                    if let title = viewModel.getTitle(note) {
+                ForEach(viewModel.notes) { note in
+                    if let title = viewModel.getTitle(note.text) {
                         Text(title)
                     }
                 }
@@ -42,7 +42,7 @@ struct NotesView: View {
             .cornerRadius(100/2)
             .padding()
             .sheet(isPresented: $showingAddNote) {
-                AddNoteView(showingAddNote: $showingAddNote, notes: $viewModel.notes)
+                AddNoteView(showingAddNote: $showingAddNote, notesViewModel: viewModel)
             }
         }
         .background(Color(.systemGroupedBackground))
