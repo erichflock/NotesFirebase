@@ -14,8 +14,23 @@ class InitialViewModel: ObservableObject {
     let clientID = "640274747024-i161pqk865674m0ej0saav67cvalegvn.apps.googleusercontent.com"
     @Published var isLoading = false
     
+    private var user: User? {
+        get {
+            if let data = UserDefaults.standard.value(forKey: "user") as? Data {
+                let user = try? PropertyListDecoder().decode(User.self, from: data)
+                return user
+            } else {
+                return nil
+            }
+        }
+
+        set {
+            UserDefaults.standard.set(try? PropertyListEncoder().encode(newValue), forKey: "user")
+        }
+    }
+    
     func isUserSignedIn() -> Bool {
-        FirebaseAuth.Auth.auth().currentUser != nil && GIDSignIn.sharedInstance.currentUser != nil
+        user != nil
     }
     
     func signIn(){
@@ -46,15 +61,16 @@ class InitialViewModel: ObservableObject {
                         print("error: \(error.localizedDescription)")
                     }
                     
+                    self.save(user: user)
                     self.isLoading = false
                 }
-    
             }
         )
     }
     
     func signOut() {
         do {
+            removeUser()
             GIDSignIn.sharedInstance.signOut()
             try Auth.auth().signOut()
             self.objectWillChange.send()
@@ -64,11 +80,25 @@ class InitialViewModel: ObservableObject {
     }
     
     func getUserName() -> String? {
-        GIDSignIn.sharedInstance.currentUser?.profile?.name
+        user?.name
     }
     
     func getProfileImage() -> URL? {
-        GIDSignIn.sharedInstance.currentUser?.profile?.imageURL(withDimension: 50)
+        user?.profileImage
     }
     
+    private func save(user: GIDGoogleUser?) {
+        let user = User(name: user?.profile?.name, profileImage: user?.profile?.imageURL(withDimension: 50))
+        self.user = user
+    }
+    
+    private func removeUser() {
+        UserDefaults.standard.set(nil, forKey: "user")
+    }
+    
+}
+
+struct User: Codable {
+    var name: String?
+    var profileImage: URL?
 }
