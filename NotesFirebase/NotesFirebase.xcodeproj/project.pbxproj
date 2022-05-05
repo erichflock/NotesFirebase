@@ -122,10 +122,10 @@
 		36EDF6432822B856008867C5 /* NotesView */ = {
 			isa = PBXGroup;
 			children = (
-				36EDF6552823FBC3008867C5 /* Edit Note */,
-				36EDF64A2822C5F4008867C5 /* Add Note */,
 				36EDF6462822BB76008867C5 /* NotesView.swift */,
 				36EDF6482822C5A6008867C5 /* NotesViewModel.swift */,
+				36EDF6552823FBC3008867C5 /* Edit Note */,
+				36EDF64A2822C5F4008867C5 /* Add Note */,
 			);
 			path = NotesView;
 			sourceTree = "<group>";

@@ -10,7 +10,7 @@ import SwiftUI
 struct EditNoteView: View {
     
     @Binding var showingEditNote: Bool
-    @Binding var note: Note
+    var note: Note
     @ObservedObject var notesViewModel: NotesViewModel
     @StateObject var viewModel = EditNoteViewModel()
     
@@ -52,6 +52,6 @@ struct EditNoteView: View {
 
 struct EditNoteView_Previews: PreviewProvider {
     static var previews: some View {
-        EditNoteView(showingEditNote: .constant(false), note: .constant(.init(key: "", text: "")), notesViewModel: .init())
+        EditNoteView(showingEditNote: .constant(false), note: .init(key: "", text: ""), notesViewModel: .init())
     }
 }
