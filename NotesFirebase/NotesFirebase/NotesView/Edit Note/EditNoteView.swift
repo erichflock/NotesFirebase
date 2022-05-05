@@ -21,12 +21,7 @@ struct EditNoteView: View {
                     .font(.title)
                 
                 TextEditor(text: $viewModel.noteText)
-                    .foregroundColor(viewModel.noteText == EditNoteViewModel.placeholder ? .gray : .primary)
-                    .onTapGesture {
-                        if viewModel.noteText == EditNoteViewModel.placeholder {
-                            viewModel.noteText = ""
-                        }
-                    }
+                    .foregroundColor(.primary)
             }
             Button {
                 viewModel.update(note: note)
@@ -47,6 +42,9 @@ struct EditNoteView: View {
               alignment: .topLeading
             )
         .overlay(XRoundedDismissButton(isShowingView: $showingEditNote), alignment: .topTrailing)
+        .onAppear() {
+            viewModel.noteText = note.text
+        }
     }
 }
 

@@ -9,8 +9,7 @@ import SwiftUI
 
 class EditNoteViewModel: ObservableObject {
     
-    static let placeholder = "Please, type your note"
-    @Published var noteText = placeholder
+    @Published var noteText = ""
     
     private var user: User? {
         if let data = UserDefaults.standard.value(forKey: "user") as? Data {
