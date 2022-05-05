@@ -24,9 +24,12 @@ struct EditNoteView: View {
                     .foregroundColor(.primary)
             }
             Button {
-                viewModel.update(note: note)
-                notesViewModel.updateNotes()
-                showingEditNote = false
+                viewModel.update(note: note) {
+                    if viewModel.didSave {
+                        notesViewModel.updateNotes()
+                        showingEditNote = false
+                    }
+                }
             } label: {
                 Text("Save")
             }
