@@ -85,7 +85,8 @@ class NotesViewModel: ObservableObject {
     
     ///Return first 3 words of note
     func getTitle(_ note: String) -> String? {
-        let words = note.components(separatedBy: " ")
+        let noteWithoutLineBreak = note.replacingOccurrences(of: "\n", with: " ")
+        let words = noteWithoutLineBreak.components(separatedBy: " ")
         
         var firstThreeWords: [String] = []
         

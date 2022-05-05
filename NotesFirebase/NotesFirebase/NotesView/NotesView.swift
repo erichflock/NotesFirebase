@@ -20,6 +20,7 @@ struct NotesView: View {
                     if let title = viewModel.getTitle(note.text) {
                         HStack {
                             Text(title)
+                                .lineLimit(1)
                             Spacer()
                         }
                         .contentShape(Rectangle())
