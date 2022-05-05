@@ -61,7 +61,7 @@ class InitialViewModel: ObservableObject {
                         print("error: \(error.localizedDescription)")
                     }
                     
-                    self.save(user: user)
+                    self.save(user: user, uid: authResult?.user.uid)
                     self.isLoading = false
                 }
             }
@@ -87,9 +87,10 @@ class InitialViewModel: ObservableObject {
         user?.profileImage
     }
     
-    private func save(user: GIDGoogleUser?) {
-        let user = User(name: user?.profile?.name, profileImage: user?.profile?.imageURL(withDimension: 50))
-        self.user = user
+    private func save(user: GIDGoogleUser?, uid: String?) {
+        guard let user = user, let uid = uid else { return }
+        
+        self.user = User(uid: uid, name: user.profile?.name, profileImage: user.profile?.imageURL(withDimension: 50))
     }
     
     private func removeUser() {
@@ -99,6 +100,7 @@ class InitialViewModel: ObservableObject {
 }
 
 struct User: Codable {
+    var uid: String
     var name: String?
     var profileImage: URL?
 }

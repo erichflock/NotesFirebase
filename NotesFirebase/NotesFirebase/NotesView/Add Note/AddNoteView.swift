@@ -28,11 +28,12 @@ struct AddNoteView: View {
                     }
             }
             Button {
-                print("Save Note: \(viewModel.note)")
+                viewModel.saveNote()
+                showingAddNote = false
             } label: {
                 Text("Save")
             }
-            .modifier(StandardButtonStyle(size: .regular))
+            .modifier(StandardButtonStyle(size: .large))
             .padding([.bottom], 50)
         }
         .padding()
