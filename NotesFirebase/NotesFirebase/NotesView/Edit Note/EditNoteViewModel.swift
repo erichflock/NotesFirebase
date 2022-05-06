@@ -16,57 +16,11 @@ class EditNoteViewModel: ObservableObject {
     
     let databaseReference = Database.database().reference()
     
-    private var user: User? {
-        if let data = UserDefaults.standard.value(forKey: "user") as? Data {
-            let user = try? PropertyListDecoder().decode(User.self, from: data)
-            return user
-        } else {
-            return nil
-        }
-    }
-    
     func update(note: Note, completion: @escaping () -> ()) {
-        guard let databaseReferece = createDatabaseReference() else {
+        NetworkManager.shared.update(note: note, newText: noteText) { [weak self] success in
+            self?.didSave = success
             completion()
-            return
         }
-        
-        databaseReferece.observeSingleEvent(of: .value, andPreviousSiblingKeyWith: { [weak self] snapshot, key in
-            guard let self = self else {
-                completion()
-                return
-            }
-            
-            let dispatchGroup = DispatchGroup()
-            let children = snapshot.children
-            
-            dispatchGroup.enter()
-            
-            for child in children {
-                let childSnapshot = child as? DataSnapshot
-                guard let key = childSnapshot?.key else {
-                    completion()
-                    return
-                }
-                databaseReferece.child(key).child("note").setValue(self.noteText)
-            }
-            
-            dispatchGroup.leave()
-            dispatchGroup.notify(queue: .main) {
-                self.didSave = true
-                completion()
-            }
-        })
-    }
-    
-    //Helper Functions
-    private func createDatabaseReference() -> DatabaseReference? {
-        guard let userID = Auth.auth().currentUser?.uid else {
-            print("error: user id not available. Please, sign in again.")
-            return nil
-        }
-        
-        return databaseReference.child("users").child(userID).child("notes")
     }
     
 }

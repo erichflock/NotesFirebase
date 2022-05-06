@@ -172,6 +172,69 @@ extension NetworkManager {
         })
     }
     
+    func saveNote(text: String, completion: @escaping (Bool) -> ()) {
+        guard let userID = user?.uid else {
+            print("error: user id not available.")
+            completion(false)
+            return
+        }
+        
+        let databaseReference = Database.database().reference()
+        
+        guard let key = databaseReference.child(userID).child("posts").childByAutoId().key else {
+            print("error: error while creating key")
+            completion(false)
+            return
+        }
+        
+        guard let userName = user?.name else {
+            completion(false)
+            return
+        }
+        
+        let post = ["date": Date().formatted(date: .abbreviated, time: .standard),
+                    "userUid": userID,
+                    "userName": userName,
+                    "note": text]
+        
+        let childUpdates = ["/users/\(userID)/notes/\(key)": post]
+        
+        databaseReference.updateChildValues(childUpdates)
+        
+        completion(true)
+    }
+    
+    func update(note: Note, newText: String, completion: @escaping (Bool) -> ()) {
+        guard let databaseReferece = createDatabaseReference() else {
+            completion(false)
+            return
+        }
+        
+        databaseReferece.observeSingleEvent(of: .value, andPreviousSiblingKeyWith: { snapshot, key in
+            let dispatchGroup = DispatchGroup()
+            let children = snapshot.children
+            
+            dispatchGroup.enter()
+            
+            for child in children {
+                let childSnapshot = child as? DataSnapshot
+                guard let key = childSnapshot?.key else {
+                    completion(false)
+                    return
+                }
+                
+                if note.key == key {
+                    databaseReferece.child(key).child("note").setValue(newText)
+                }
+            }
+            
+            dispatchGroup.leave()
+            dispatchGroup.notify(queue: .main) {
+                completion(true)
+            }
+        })
+    }
+    
     //Helper Functions
     private func createDatabaseReference() -> DatabaseReference? {
         guard let userID = Auth.auth().currentUser?.uid else {

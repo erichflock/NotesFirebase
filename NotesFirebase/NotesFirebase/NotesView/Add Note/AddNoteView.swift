@@ -28,9 +28,10 @@ struct AddNoteView: View {
                     }
             }
             Button {
-                viewModel.saveNote()
-                notesViewModel.updateNotes()
-                showingAddNote = false
+                viewModel.saveNote() {
+                    notesViewModel.updateNotes()
+                    showingAddNote = false
+                }
             } label: {
                 Text("Save")
             }
