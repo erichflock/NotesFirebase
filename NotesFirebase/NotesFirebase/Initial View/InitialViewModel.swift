@@ -11,90 +11,39 @@ import GoogleSignIn
 
 class InitialViewModel: ObservableObject {
     
-    let clientID = "640274747024-i161pqk865674m0ej0saav67cvalegvn.apps.googleusercontent.com"
     @Published var isLoading = false
     
-    private var user: User? {
-        get {
-            if let data = UserDefaults.standard.value(forKey: "user") as? Data {
-                let user = try? PropertyListDecoder().decode(User.self, from: data)
-                return user
-            } else {
-                return nil
+    func signIn() {
+        isLoading = true
+        
+        NetworkManager.shared.signIn() { [weak self] success in
+            self?.isLoading = false
+            
+            guard success else {
+                print("Sign in error")
+                return
             }
+            
+            self?.objectWillChange.send()
         }
-
-        set {
-            UserDefaults.standard.set(try? PropertyListEncoder().encode(newValue), forKey: "user")
+    }
+    
+    func signOut() {
+        NetworkManager.shared.signOut() { success in
+            self.objectWillChange.send()
         }
     }
     
     func isUserSignedIn() -> Bool {
-        user != nil
-    }
-    
-    func signIn(){
-        guard let presentingViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else { return }
-        
-        isLoading = true
-        
-        let signInConfig = GIDConfiguration.init(clientID: clientID)
-        GIDSignIn.sharedInstance.signIn(
-            with: signInConfig,
-            presenting: presentingViewController,
-            callback: { user, error in
-                if let error = error {
-                    print("error: \(error.localizedDescription)")
-                    self.isLoading = false
-                }
-                
-                guard let auth = user?.authentication, let idToken = auth.idToken else {
-                    print("SignIn Error: No authentication data available")
-                    self.isLoading = false
-                    return
-                }
-                
-                let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: auth.accessToken)
-                
-                Auth.auth().signIn(with: credential) { authResult, error in
-                    if let error = error {
-                        print("error: \(error.localizedDescription)")
-                    }
-                    
-                    self.save(user: user, uid: authResult?.user.uid)
-                    self.isLoading = false
-                }
-            }
-        )
-    }
-    
-    func signOut() {
-        do {
-            removeUser()
-            GIDSignIn.sharedInstance.signOut()
-            try Auth.auth().signOut()
-            self.objectWillChange.send()
-        } catch {
-            print("error: \(error.localizedDescription)")
-        }
+        NetworkManager.shared.isUserSignedIn()
     }
     
     func getUserName() -> String? {
-        user?.name
+        NetworkManager.shared.user?.name
     }
     
     func getProfileImage() -> URL? {
-        user?.profileImage
-    }
-    
-    private func save(user: GIDGoogleUser?, uid: String?) {
-        guard let user = user, let uid = uid else { return }
-        
-        self.user = User(uid: uid, name: user.profile?.name, profileImage: user.profile?.imageURL(withDimension: 50))
-    }
-    
-    private func removeUser() {
-        UserDefaults.standard.set(nil, forKey: "user")
+        NetworkManager.shared.user?.profileImage
     }
     
 }

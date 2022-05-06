@@ -5,8 +5,10 @@
 //  Created by Erich Flock on 06.05.22.
 //
 
+import Firebase
 import FirebaseDatabase
 import FirebaseAuth
+import GoogleSignIn
 
 class NetworkManager {
     
@@ -14,7 +16,98 @@ class NetworkManager {
     
     let databaseReference = Database.database().reference()
     
+    @Published var isLoading = false
+    
+    var user: User? {
+        get {
+            if let data = UserDefaults.standard.value(forKey: "user") as? Data {
+                let user = try? PropertyListDecoder().decode(User.self, from: data)
+                return user
+            } else {
+                return nil
+            }
+        }
+
+        set {
+            UserDefaults.standard.set(try? PropertyListEncoder().encode(newValue), forKey: "user")
+        }
+    }
+    
     private init() {}
+}
+
+//MARK: Authentication
+extension NetworkManager {
+    
+    func isUserSignedIn() -> Bool {
+        user != nil
+    }
+    
+    func signIn(completion: @escaping (Bool) -> ()) {
+        guard let presentingViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else {
+            completion(false)
+            return
+        }
+        
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+        
+        let signInConfig = GIDConfiguration.init(clientID: clientID)
+        GIDSignIn.sharedInstance.signIn(
+            with: signInConfig,
+            presenting: presentingViewController,
+            callback: { user, error in
+                if let error = error {
+                    print("error: \(error.localizedDescription)")
+                    completion(false)
+                }
+                
+                guard let auth = user?.authentication, let idToken = auth.idToken else {
+                    print("SignIn Error: No authentication data available")
+                    completion(false)
+                    return
+                }
+                
+                let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: auth.accessToken)
+                
+                Auth.auth().signIn(with: credential) { authResult, error in
+                    if let error = error {
+                        print("error: \(error.localizedDescription)")
+                        completion(false)
+                    }
+                    
+                    self.save(user: user, uid: authResult?.user.uid)
+                    completion(true)
+                }
+            }
+        )
+    }
+    
+    func signOut(completion: @escaping (Bool) -> ()) {
+        do {
+            removeUser()
+            GIDSignIn.sharedInstance.signOut()
+            try Auth.auth().signOut()
+            completion(true)
+        } catch {
+            print("error: \(error.localizedDescription)")
+            completion(false)
+        }
+    }
+    
+    private func save(user: GIDGoogleUser?, uid: String?) {
+        guard let user = user, let uid = uid else { return }
+        
+        self.user = User(uid: uid, name: user.profile?.name, profileImage: user.profile?.imageURL(withDimension: 50))
+    }
+    
+    private func removeUser() {
+        UserDefaults.standard.set(nil, forKey: "user")
+    }
+    
+}
+
+//MARK: Database
+extension NetworkManager {
     
     func getNotes(completion: @escaping ([Note]) -> ()) {
         guard let databaseReference = createDatabaseReference() else { return }
