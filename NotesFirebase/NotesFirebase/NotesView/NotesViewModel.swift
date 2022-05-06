@@ -16,61 +16,20 @@ class NotesViewModel: ObservableObject {
     let databaseReference = Database.database().reference()
     
     func updateNotes() {
-        guard let databaseReference = createDatabaseReference() else { return }
-        
-        let query = databaseReference.queryOrdered(byChild: "/date")
-        
-        query.observeSingleEvent(of: .value, andPreviousSiblingKeyWith: { [weak self] snapshot, key in
-            guard let self = self else { return }
-            
-            let dispatchGroup = DispatchGroup()
-            let children = snapshot.children
-            
-            dispatchGroup.enter()
-            
-            var updatedNotes: [Note] = []
-            
-            for child in children {
-                let childSnapshot = child as? DataSnapshot
-                guard let childNote = childSnapshot?.value as? NSDictionary else { return }
-                
-                if let key = childSnapshot?.key, let noteText = childNote.value(forKey: "note") as? String {
-                    let note = Note(key: key, text: noteText)
-                    updatedNotes.append(note)
-                }
-            }
-            dispatchGroup.leave()
-            dispatchGroup.notify(queue: .main) {
-                self.notes = updatedNotes
-            }
-        })
+        NetworkManager.shared.getNotes() { [weak self] notes in
+            self?.notes = notes
+        }
     }
     
     func deleteNote(noteKey: String) {
-        guard let databaseReferece = createDatabaseReference() else { return }
-        
-        databaseReferece.observeSingleEvent(of: .value, andPreviousSiblingKeyWith: { [weak self] snapshot, key in
-            guard let self = self else { return }
-            
-            let dispatchGroup = DispatchGroup()
-            let children = snapshot.children
-            
-            dispatchGroup.enter()
-            
-            for child in children {
-                let childSnapshot = child as? DataSnapshot
-                guard let key = childSnapshot?.key else { return }
-                
-                if noteKey == key {
-                    databaseReferece.child(noteKey).removeValue()
-                }
+        NetworkManager.shared.deleteNote(noteKey: noteKey) { [weak self] success in
+            guard success else {
+                print("Error while deleting note with key \(noteKey)")
+                return
             }
             
-            dispatchGroup.leave()
-            dispatchGroup.notify(queue: .main) {
-                self.updateNotes()
-            }
-        })
+            self?.updateNotes()
+        }
     }
     
     func removeRows(at offsets: IndexSet) {
@@ -108,15 +67,5 @@ class NotesViewModel: ObservableObject {
         
         return title
     }
-    
-    //Helper Functions
-    private func createDatabaseReference() -> DatabaseReference? {
-        guard let userID = Auth.auth().currentUser?.uid else {
-            print("error: user id not available. Please, sign in again.")
-            return nil
-        }
-        
-        return databaseReference.child("users").child(userID).child("notes")
-    }
-    
+
 }
