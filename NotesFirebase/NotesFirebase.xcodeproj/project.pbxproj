@@ -25,6 +25,7 @@
 		36EDF6542823ECC4008867C5 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EDF6532823ECC4008867C5 /* Note.swift */; };
 		36EDF6572823FBD0008867C5 /* EditNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EDF6562823FBD0008867C5 /* EditNoteView.swift */; };
 		36EDF6592823FBDB008867C5 /* EditNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EDF6582823FBDB008867C5 /* EditNoteViewModel.swift */; };
+		36EDF65F28250C64008867C5 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EDF65E28250C64008867C5 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		36EDF6532823ECC4008867C5 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		36EDF6562823FBD0008867C5 /* EditNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteView.swift; sourceTree = "<group>"; };
 		36EDF6582823FBDB008867C5 /* EditNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteViewModel.swift; sourceTree = "<group>"; };
+		36EDF65E28250C64008867C5 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 		36EDF6232822A483008867C5 /* NotesFirebase */ = {
 			isa = PBXGroup;
 			children = (
+				36EDF65D28250C2C008867C5 /* Manager */,
 				36EDF6522823ECA1008867C5 /* Model */,
 				36EDF6402822AE82008867C5 /* Views */,
 				36EDF6392822A71D008867C5 /* Info.plist */,
@@ -162,6 +165,14 @@
 				36EDF6582823FBDB008867C5 /* EditNoteViewModel.swift */,
 			);
 			path = "Edit Note";
+			sourceTree = "<group>";
+		};
+		36EDF65D28250C2C008867C5 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				36EDF65E28250C64008867C5 /* NetworkManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,6 +258,7 @@
 				36EDF6272822A483008867C5 /* InitialView.swift in Sources */,
 				36EDF6422822AE8F008867C5 /* CustomModifiers.swift in Sources */,
 				36EDF6572823FBD0008867C5 /* EditNoteView.swift in Sources */,
+				36EDF65F28250C64008867C5 /* NetworkManager.swift in Sources */,
 				36EDF6492822C5A6008867C5 /* NotesViewModel.swift in Sources */,
 				36EDF6512822CDD2008867C5 /* AddNoteViewModel.swift in Sources */,
 				36EDF6472822BB76008867C5 /* NotesView.swift in Sources */,
@@ -394,6 +406,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -426,6 +439,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
