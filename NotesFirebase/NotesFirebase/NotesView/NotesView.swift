@@ -12,6 +12,13 @@ struct NotesView: View {
     @StateObject var viewModel = NotesViewModel()
     @State var showingAddNote = false
     @State var showingEditNote = false
+    @State private var selectedNote: Note? {
+        didSet {
+            if selectedNote != nil {
+                showingEditNote.toggle()
+            }
+        }
+    }
     
     var body: some View {
         VStack {
@@ -25,10 +32,7 @@ struct NotesView: View {
                         }
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            showingEditNote.toggle()
-                        }
-                        .sheet(isPresented: $showingEditNote) {
-                            EditNoteView(showingEditNote: $showingEditNote, note: note, notesViewModel: viewModel)
+                            selectedNote = note
                         }
                     }
                 }
@@ -55,6 +59,11 @@ struct NotesView: View {
             .padding()
             .sheet(isPresented: $showingAddNote) {
                 AddNoteView(showingAddNote: $showingAddNote, notesViewModel: viewModel)
+            }
+            .sheet(isPresented: $showingEditNote) {
+                if let selectedNote = selectedNote {
+                    EditNoteView(showingEditNote: $showingEditNote, note: selectedNote, notesViewModel: viewModel)
+                }
             }
         }
         .background(Color(.systemGroupedBackground))
