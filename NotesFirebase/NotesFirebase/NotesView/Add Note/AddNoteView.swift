@@ -34,6 +34,10 @@ struct AddNoteView: View {
                 }
             } label: {
                 Text("Save")
+                if viewModel.isLoading {
+                    ProgressView()
+                        .padding([.leading])
+                }
             }
             .modifier(StandardButtonStyle(size: .large))
             .padding([.bottom], 50)

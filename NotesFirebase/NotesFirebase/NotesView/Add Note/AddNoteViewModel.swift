@@ -11,7 +11,7 @@ import FirebaseDatabase
 class AddNoteViewModel: ObservableObject {
     
     static let placeholder = "Please, type your note"
-    
+    @Published var isLoading = false
     @Published var note = placeholder
     
     func saveNote(completion: @escaping () -> ()) {
@@ -20,7 +20,10 @@ class AddNoteViewModel: ObservableObject {
             return
         }
         
-        NetworkManager.shared.saveNote(text: note) { success in
+        isLoading = true
+        
+        NetworkManager.shared.saveNote(text: note) { [weak self] success in
+            self?.isLoading = false
             completion()
         }
     }
